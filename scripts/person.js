@@ -1,15 +1,6 @@
 function Person(s) {
     var r = random();
     var pos;
-    if (r < .25) {
-        pos = createVector(0, random() * windowHeight);
-    } else if (r < .5) {
-        pos = createVector(windowWidth, random() * windowHeight);
-    } else if (r < .75) {
-        pos = createVector(random() * windowWidth, 0);
-    } else {
-        pos = createVector(random() * windowWidth, windowHeight);
-    }
 
     if (r < .25) {
         pos = createVector(0, random() * windowHeight);
