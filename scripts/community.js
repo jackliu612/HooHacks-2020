@@ -3,9 +3,11 @@ function Community(pop) {
     var numSusceptible = [];
     var numInfected = [];
     var numRemoved = [];
+    var numDead = [];
     var latestSusceptible;
     var latestInfected;
     var latestRemoved;
+    var latestDead;
 
     var transmissionRadius = 10;
 
@@ -29,6 +31,7 @@ function Community(pop) {
         latestSusceptible = 0;
         latestInfected = 0;
         latestRemoved = 0;
+        latestDead = 0;
 
         population.forEach(function (p) {
             p.update();
@@ -37,21 +40,24 @@ function Community(pop) {
             } else if (p.getStatus() === 1) {                                       //Infected, transmit to nearby
                 latestInfected++;
                 population.forEach(function (p2) {                                  //Transmission Code
-                    if(p2.getStatus() !== 2) {                                      //Check if not removed
+                    if(p2.getStatus() === 0) {                                       //Check if not removed
                         var distance = p.getPosition().dist(p2.getPosition());      //Could optimize if we wanted
                         if (distance <= transmissionRadius) {
                             p2.setStatus(1);
                         }
                     }
                 });
-            } else {
+            } else if (p.getStatus() === 2) {
                 latestRemoved++;
+            } else {
+                latestDead++;
             }
         });
 
         numSusceptible.push(latestSusceptible);
         numInfected.push(latestInfected);
         numRemoved.push(latestRemoved);
+        numDead.push(latestDead);
     };
 
     this.getNumSusceptible = function () {
@@ -66,6 +72,10 @@ function Community(pop) {
         return numRemoved;
     };
 
+    this.getNumDead = function () {
+        return numDead
+    };
+
     this.getNumLatestSusceptible = function () {
         return latestSusceptible;
     };
@@ -76,5 +86,9 @@ function Community(pop) {
 
     this.getNumLatestRemoved = function () {
         return latestRemoved;
+    };
+
+    this.getNumLatestDead = function() {
+        return latestDead;
     };
 }

@@ -1,20 +1,52 @@
 var BUFFER_WIDTH = 500;
 var BUFFER_HEIGHT = 500;
+var FATALITY_FACTOR = 0.001;
+var RECOVERY_FACTOR = 0.002;
+var timeInfected = 0;
 
 function Person(s) {
     var pos = generatePos();
     var SPEED = 0.44;
     var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
     var size = 0.15;
-    
+
 
     var status = s;
-    var color = ['white', 'red', 'blue'];
+    var color = ['white', 'red', 'blue', 'black'];
 
     this.update = function () {
+        switch (status) {
+            case 1:
+                timeInfected++;
+                die();
+                recover();
+                move();
+                break;
+            case 0:
+            case 2:
+                move();
+                break;
+        }
+    };
+
+    function recover() {
+        rRate = Math.pow((RECOVERY_FACTOR * timeInfected / 10000), 3);
+        if (random() < rRate) {
+            status = 2;
+        }
+    }
+
+    function die() {
+        fRate = Math.pow((FATALITY_FACTOR * timeInfected / 10000), 3);
+        if (random() < fRate) {
+            status = 3;
+        }
+    }
+
+    function move() {
         pos.add(vel);
         bounceWalls();
-    };
+    }
 
     function bounceWalls() {
         if (pos.x < 0 || pos.x > BUFFER_WIDTH) {
@@ -26,8 +58,8 @@ function Person(s) {
         }
     }
 
-    function generatePos(){
-        return createVector(random()*BUFFER_WIDTH, random()*BUFFER_HEIGHT);
+    function generatePos() {
+        return createVector(random() * BUFFER_WIDTH, random() * BUFFER_HEIGHT);
     }
 
     this.show = function show(b) {
@@ -51,7 +83,7 @@ function Person(s) {
         return size;
     };
 
-    this.getStatus = function() {
+    this.getStatus = function () {
         return status;
     };
 
