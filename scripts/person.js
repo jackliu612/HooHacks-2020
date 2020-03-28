@@ -53,10 +53,19 @@ function Person(s) {
         return size;
     }
 
+    this.getStatus = function() {
+        return status;
+    }
+
     this.setPosition = function (p) {
         pos = p.copy();
     }
     this.setVelocity = function (v) {
         vel = v.copy();
     }
+
+    this.setStatus = function (s) {
+        status = s;
+    }
+
 }

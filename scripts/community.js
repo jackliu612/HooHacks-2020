@@ -18,6 +18,21 @@ function Community(pop) {
     this.update = function () {
         population.forEach(function (p) {
             p.update();
+            transmit();
         });
-    };
+    }
+
+    function transmit(){
+        population.forEach(function (p1) {
+            console.log(p1);
+            if(p1.getStatus() == 1){    //infected, tranmit to nearby
+                population.forEach(function (p2) {
+                    var distance = p1.getPosition().dist(p2.getPosition());
+                    if(distance <= .3){
+                        p2.setStatus(1);
+                    }
+                });
+            }
+        });
+    }
 }
