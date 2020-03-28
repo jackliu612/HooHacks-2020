@@ -9,5 +9,6 @@ function setup() {
 
 function draw() {
     com.update();
+    background(51);
     com.show();
 }
