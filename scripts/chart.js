@@ -7,21 +7,27 @@ var chart = new Chart(ctx, {
     data: {
         labels: [],
         datasets: [{
-            label: 'yeet',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            label: 'Infected',
+            backgroundColor: 'rgb(184, 4, 4)',
+            borderColor: 'rgb(184, 4, 4)',
             data: []
         }, {            
-            label: 'yote',
-            backgroundColor: 'rgb(132, 99, 255)',
-            borderColor: 'rgb(132, 99, 255)',
+            label: 'Susceptible',
+            backgroundColor: 'rgb(232, 230, 230)',
+            borderColor: 'rgb(232, 230, 230)',
             data: []
         }, {
-            label: 'yote',
-            backgroundColor: 'rgb(132, 255, 255)',
-            borderColor: 'rgb(132, 255, 255)',
+            label: 'Recovered',
+            backgroundColor: 'rgb(188, 227, 166)',
+            borderColor: 'rgb(188, 227, 166)',
+            data: []
+        }, {            
+            label: 'Dead',
+            backgroundColor: 'rgb(10, 10, 10)',
+            borderColor: 'rgb(10, 10, 10)',
             data: []
         }]
+        
     },
 
     // Configuration options go here

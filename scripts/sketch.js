@@ -80,9 +80,9 @@ function getTotNumRemoved() {
 
 function addData(sus, inf, rem) {
     chart.data.labels.push('');
-    chart.data.datasets[0].data.push(sus/1200);
-    chart.data.datasets[1].data.push(inf/1200);
-    chart.data.datasets[2].data.push(rem/1200);
+    chart.data.datasets[1].data.push(sus);
+    chart.data.datasets[0].data.push(inf);
+    chart.data.datasets[2].data.push(rem);
     
     chart.update(0);
 
