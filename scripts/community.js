@@ -94,4 +94,8 @@ function Community(pop) {
     this.getNumLatestDead = function() {
         return latestDead;
     };
+
+    this.getPopulation = function() {
+        return population;
+    };
 }

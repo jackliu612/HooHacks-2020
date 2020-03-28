@@ -4,6 +4,8 @@ var totNumInfected = [];
 var totNumRemoved = [];
 var totNumDead = [];
 
+var travelRate = 0.003;
+
 var popSize = 200;
 var canvas;
 var HEIGHT;
@@ -17,7 +19,7 @@ var vPad;
 var count = 0;
 
 function setup() {
-    
+
     //frameRate(10);
     HEIGHT = windowHeight;
     WIDTH = windowWidth / 2;
@@ -43,6 +45,16 @@ function draw() {
 
     for (var r = 0; r < 3; r++) {
         for (var c = 0; c < 2; c++) {
+            var pop = coms[r][c].getPopulation();
+            var travels = pop.length*travelRate;
+            for (var i = 0; i < travels; i++){
+                coms[Math.floor(random()*3)][Math.floor(random()*2)].getPopulation().push(pop.shift());
+            }
+        }
+    }
+
+    for (r = 0; r < 3; r++) {
+        for (c = 0; c < 2; c++) {
             coms[r][c].update();
             var buff = coms[r][c].show();
             image(buff, hPad + c * (comSize + hPad), vPad + r * (comSize + vPad), comSize, comSize);
@@ -52,9 +64,12 @@ function draw() {
             ded += coms[r][c].getNumLatestDead();
         }
     }
-/*     totNumSusceptible.push(sus);
-    totNumInfected.push(inf);
-    totNumRemoved.push(rem); */
+    /*
+        totNumSusceptible.push(sus);
+        totNumInfected.push(inf);
+        totNumRemoved.push(rem);
+        totNumDead.push(ded);
+    */
 
     // coms[0][0].update();
     // var buf = coms[0][0].show();
@@ -62,8 +77,8 @@ function draw() {
     // strokeWeight(4);
     // image(buf, 20, 20, comSize, comSize);
     // pop();
-    if(frameCount % 5 === 0)
-        addData(sus,inf,rem);
+    if (frameCount % 5 === 0)
+        addData(sus, inf, rem);
 }
 
 function getTotNumSusceptible() {
@@ -78,13 +93,24 @@ function getTotNumRemoved() {
     return totNumRemoved;
 }
 
+function getTotNumDead() {
+    return totNumDead;
+}
+
 function addData(sus, inf, rem) {
     chart.data.labels.push('');
+<<<<<<< HEAD
     chart.data.datasets[1].data.push(sus);
     chart.data.datasets[0].data.push(inf);
     chart.data.datasets[2].data.push(rem);
     
+=======
+    chart.data.datasets[0].data.push(sus / 1200);
+    chart.data.datasets[1].data.push(inf / 1200);
+    chart.data.datasets[2].data.push(rem / 1200);
+
+>>>>>>> 1a8c063b102e2f9c8911a84d54a71924048e277b
     chart.update(0);
 
     console.log("added")
-  }
+}
