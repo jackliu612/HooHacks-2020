@@ -1,5 +1,7 @@
 function Community(pop) {
     var population = [];
+    population.push(new Person(1));
+
     for (var i = 0; i < pop; i++) {
         population.push(new Person(0));
     }

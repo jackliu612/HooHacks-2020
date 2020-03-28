@@ -1,6 +1,7 @@
 function Person(s) {
     var r = random();
     var pos;
+    
 
     if (r < .25) {
         pos = createVector(0, random() * windowHeight);
@@ -12,10 +13,13 @@ function Person(s) {
         pos = createVector(random() * windowWidth, windowHeight);
     }
 
-    var vel = createVector(random() * 2 + 1.5, 0).rotate(random() * Math.PI * 2);
-    var size = 5;
+    const SPEED = 0.44;
+    var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
+    var size = 0.1;
+    
 
     var status = s;
+    var color = ['white', 'red', 'blue'];
 
     this.update = function () {
         pos.add(vel);
@@ -35,9 +39,8 @@ function Person(s) {
 
     this.show = function show() {
         push();
-        stroke(255);
-        strokeWeight(1);
-        noFill();
+        noStroke();
+        fill(color[status]);
         translate(pos.x, pos.y);
         ellipse(0, 0, 50 * size, 50 * size);
         pop();
