@@ -1,7 +1,8 @@
-function Person(s) {
-    var pos;
-    generatePos();
+var BUFFER_WIDTH = 1000;
+var BUFFER_HEIGHT = 1000;
 
+function Person(s) {
+    var pos = generatePos();
     var SPEED = 0.44;
     var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
     var size = 0.1;
@@ -16,11 +17,11 @@ function Person(s) {
     }
 
     function bounceWalls() {
-        if (pos.x < 0 || pos.x > windowWidth) {
+        if (pos.x < 0 || pos.x > BUFFER_WIDTH) {
             vel = createVector(-vel.x, vel.y);
         }
 
-        if (pos.y < 0 || pos.y > windowHeight) {
+        if (pos.y < 0 || pos.y > BUFFER_HEIGHT) {
             vel = createVector(vel.x, -1 * vel.y);
         }
 
@@ -28,16 +29,7 @@ function Person(s) {
 
     function generatePos(){
         var r = random();
-
-        if (r < .25) {
-            return createVector(0, random() * windowHeight);
-        } else if (r < .5) {
-            return createVector(windowWidth, random() * windowHeight);
-        } else if (r < .75) {
-            return createVector(random() * windowWidth, 0);
-        } else {
-            return createVector(random() * windowWidth, windowHeight);
-        }
+        return createVector(random()*BUFFER_WIDTH, random()*BUFFER_HEIGHT);
     }
 
     this.show = function show(b) {
