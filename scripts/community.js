@@ -1,9 +1,9 @@
 function Community(pop) {
     var population = [];
-    var buffer = createGraphics(1000,1000);
+    var buffer = createGraphics(500,500);
     population.push(new Person(1));
 
-    for (var i = 0; i < pop; i++) {
+    for (var i = 1; i < pop; i++) {
         population.push(new Person(0));
     }
 
@@ -18,17 +18,16 @@ function Community(pop) {
     this.update = function () {
         population.forEach(function (p) {
             p.update();
-            transmit();
         });
-    }
+        transmit();
+    };
 
     function transmit(){
         population.forEach(function (p1) {
-            console.log(p1);
-            if(p1.getStatus() == 1){    //infected, tranmit to nearby
+            if(p1.getStatus() === 1){    //infected, tranmit to nearby
                 population.forEach(function (p2) {
                     var distance = p1.getPosition().dist(p2.getPosition());
-                    if(distance <= .3){
+                    if(distance <= 10){
                         p2.setStatus(1);
                     }
                 });

@@ -1,5 +1,5 @@
-var BUFFER_WIDTH = 1000;
-var BUFFER_HEIGHT = 1000;
+var BUFFER_WIDTH = 500;
+var BUFFER_HEIGHT = 500;
 
 function Person(s) {
     var pos = generatePos();
