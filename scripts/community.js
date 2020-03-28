@@ -1,3 +1,5 @@
+var INFECTION_RATE = 0.3;
+
 function Community(pop) {
     var population = [];
     var numSusceptible = [];
@@ -42,7 +44,7 @@ function Community(pop) {
                 population.forEach(function (p2) {                                  //Transmission Code
                     if(p2.getStatus() === 0) {                                       //Check if not removed
                         var distance = p.getPosition().dist(p2.getPosition());      //Could optimize if we wanted
-                        if (distance <= transmissionRadius) {
+                        if (distance <= transmissionRadius && random() < INFECTION_RATE) {
                             p2.setStatus(1);
                         }
                     }
