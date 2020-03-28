@@ -54,12 +54,7 @@ function draw() {
     }
 /*     totNumSusceptible.push(sus);
     totNumInfected.push(inf);
-<<<<<<< HEAD
     totNumRemoved.push(rem); */
-=======
-    totNumRemoved.push(rem);
-    totNumDead.push(ded);
->>>>>>> 96316079c3c086064b55cc70b0d6dde404a585d7
 
     // coms[0][0].update();
     // var buf = coms[0][0].show();
@@ -85,7 +80,6 @@ function getTotNumRemoved() {
     return totNumRemoved;
 }
 
-<<<<<<< HEAD
 function addData(sus, inf, rem) {
     chart.data.labels.push('');
     chart.data.datasets[0].data.push(sus);
@@ -96,8 +90,3 @@ function addData(sus, inf, rem) {
 
     console.log("added")
   }
-=======
-function getTotNumDead() {
-    return totNumDead;
-}
->>>>>>> 96316079c3c086064b55cc70b0d6dde404a585d7

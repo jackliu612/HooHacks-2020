@@ -90,11 +90,8 @@ function Community(pop) {
         return latestRemoved;
     };
 
-<<<<<<< HEAD
 
-=======
     this.getNumLatestDead = function() {
         return latestDead;
     };
->>>>>>> 96316079c3c086064b55cc70b0d6dde404a585d7
 }
