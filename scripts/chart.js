@@ -27,6 +27,9 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {
         scales: {
+            xAxes:[{
+                display:false
+            }],
             yAxes: [{
                 stacked: true
             }]
@@ -42,7 +45,11 @@ var chart = new Chart(ctx, {
         elements: {
             line: {
                 tension: 0 // disables bezier curves
+            },
+            point: {
+                radius: 0
             }
+            
         }
     }        
 
