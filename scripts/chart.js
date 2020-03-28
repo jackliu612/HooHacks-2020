@@ -30,7 +30,20 @@ var chart = new Chart(ctx, {
             yAxes: [{
                 stacked: true
             }]
+        },
+        animation: {
+            duration: 0 // general animation time
+        },
+        hover: {
+            animationDuration: 0 // duration of animations when hovering an item
+        },
+        responsiveAnimationDuration: 0 // animation duration after a resize
+        ,        
+        elements: {
+            line: {
+                tension: 0 // disables bezier curves
+            }
         }
     }        
-    
+
 });
