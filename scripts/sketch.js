@@ -62,10 +62,8 @@ function draw() {
     // strokeWeight(4);
     // image(buf, 20, 20, comSize, comSize);
     // pop();
-    if(count % 5 == 0)
+    if(frameCount % 5 === 0)
         addData(sus,inf,rem);
-
-    count++;
 }
 
 function getTotNumSusceptible() {
