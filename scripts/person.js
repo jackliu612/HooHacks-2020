@@ -2,7 +2,7 @@ function Person(s) {
     var pos;
     generatePos();
 
-    const SPEED = 0.44;
+    var SPEED = 0.44;
     var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
     var size = 0.1;
     
@@ -40,13 +40,13 @@ function Person(s) {
         }
     }
 
-    this.show = function show() {
-        push();
-        noStroke();
-        fill(color[status]);
-        translate(pos.x, pos.y);
-        ellipse(0, 0, 50 * size, 50 * size);
-        pop();
+    this.show = function show(b) {
+        b.push();
+        b.noStroke();
+        b.fill(color[status]);
+        b.translate(pos.x, pos.y);
+        b.ellipse(0, 0, 50 * size, 50 * size);
+        b.pop();
     }
 
     this.getPosition = function () {
