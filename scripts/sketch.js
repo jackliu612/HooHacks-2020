@@ -99,17 +99,10 @@ function getTotNumDead() {
 
 function addData(sus, inf, rem) {
     chart.data.labels.push('');
-<<<<<<< HEAD
     chart.data.datasets[1].data.push(sus);
     chart.data.datasets[0].data.push(inf);
     chart.data.datasets[2].data.push(rem);
     
-=======
-    chart.data.datasets[0].data.push(sus / 1200);
-    chart.data.datasets[1].data.push(inf / 1200);
-    chart.data.datasets[2].data.push(rem / 1200);
-
->>>>>>> 1a8c063b102e2f9c8911a84d54a71924048e277b
     chart.update(0);
 
     console.log("added")
