@@ -1,11 +1,15 @@
+var INFECTION_RATE = 0.3;
+
 function Community(pop) {
     var population = [];
     var numSusceptible = [];
     var numInfected = [];
     var numRemoved = [];
+    var numDead = [];
     var latestSusceptible;
     var latestInfected;
     var latestRemoved;
+    var latestDead;
 
     var transmissionRadius = 10;
 
@@ -29,6 +33,7 @@ function Community(pop) {
         latestSusceptible = 0;
         latestInfected = 0;
         latestRemoved = 0;
+        latestDead = 0;
 
         population.forEach(function (p) {
             p.update();
@@ -37,21 +42,24 @@ function Community(pop) {
             } else if (p.getStatus() === 1) {                                       //Infected, transmit to nearby
                 latestInfected++;
                 population.forEach(function (p2) {                                  //Transmission Code
-                    if(p2.getStatus() !== 2) {                                      //Check if not removed
+                    if(p2.getStatus() === 0) {                                       //Check if not removed
                         var distance = p.getPosition().dist(p2.getPosition());      //Could optimize if we wanted
-                        if (distance <= transmissionRadius) {
+                        if (distance <= transmissionRadius && random() < INFECTION_RATE) {
                             p2.setStatus(1);
                         }
                     }
                 });
-            } else {
+            } else if (p.getStatus() === 2) {
                 latestRemoved++;
+            } else {
+                latestDead++;
             }
         });
 
         numSusceptible.push(latestSusceptible);
         numInfected.push(latestInfected);
         numRemoved.push(latestRemoved);
+        numDead.push(latestDead);
     };
 
     this.getNumSusceptible = function () {
@@ -66,6 +74,10 @@ function Community(pop) {
         return numRemoved;
     };
 
+    this.getNumDead = function () {
+        return numDead
+    };
+
     this.getNumLatestSusceptible = function () {
         return latestSusceptible;
     };
@@ -78,5 +90,11 @@ function Community(pop) {
         return latestRemoved;
     };
 
+<<<<<<< HEAD
 
+=======
+    this.getNumLatestDead = function() {
+        return latestDead;
+    };
+>>>>>>> 96316079c3c086064b55cc70b0d6dde404a585d7
 }
