@@ -1,17 +1,6 @@
 function Person(s) {
-    var r = random();
     var pos;
-    
-
-    if (r < .25) {
-        pos = createVector(0, random() * windowHeight);
-    } else if (r < .5) {
-        pos = createVector(windowWidth, random() * windowHeight);
-    } else if (r < .75) {
-        pos = createVector(random() * windowWidth, 0);
-    } else {
-        pos = createVector(random() * windowWidth, windowHeight);
-    }
+    generatePos();
 
     const SPEED = 0.44;
     var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
@@ -35,6 +24,20 @@ function Person(s) {
             vel = createVector(vel.x, -1 * vel.y);
         }
 
+    }
+
+    function generatePos(){
+        var r = random();
+
+        if (r < .25) {
+            return createVector(0, random() * windowHeight);
+        } else if (r < .5) {
+            return createVector(windowWidth, random() * windowHeight);
+        } else if (r < .75) {
+            return createVector(random() * windowWidth, 0);
+        } else {
+            return createVector(random() * windowWidth, windowHeight);
+        }
     }
 
     this.show = function show() {
