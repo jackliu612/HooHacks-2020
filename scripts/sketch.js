@@ -14,6 +14,7 @@ var hPad;
 var vPad;
 
 function setup() {
+    
     //frameRate(10);
     HEIGHT = windowHeight;
     WIDTH = windowWidth/2;
@@ -21,6 +22,8 @@ function setup() {
     vPad = (HEIGHT - 3 * comSize) / 4;
 
     canvas = createCanvas(WIDTH, HEIGHT);
+    canvas.parent('sketch-holder');
+
     background(81);
 
     for (var r = 0; r < 3; r++) {
