@@ -13,6 +13,8 @@ var boarderWidth = 3;
 var hPad;
 var vPad;
 
+var count = 0;
+
 function setup() {
     
     //frameRate(10);
@@ -24,7 +26,7 @@ function setup() {
     canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent('sketch-holder');
 
-    background(81);
+    background(255);
 
     for (var r = 0; r < 3; r++) {
         for (var c = 0; c < 2; c++) {
@@ -48,9 +50,9 @@ function draw() {
             rem+=coms[r][c].getNumLatestRemoved();
         }
     }
-    totNumSusceptible.push(sus);
+/*     totNumSusceptible.push(sus);
     totNumInfected.push(inf);
-    totNumRemoved.push(rem);
+    totNumRemoved.push(rem); */
 
     // coms[0][0].update();
     // var buf = coms[0][0].show();
@@ -58,6 +60,10 @@ function draw() {
     // strokeWeight(4);
     // image(buf, 20, 20, comSize, comSize);
     // pop();
+    if(count % 5 == 0)
+        addData(sus,inf,rem);
+
+    count++;
 }
 
 function getTotNumSusceptible(){
@@ -71,3 +77,14 @@ function getTotNumInfected(){
 function getTotNumRemoved(){
     return totNumRemoved;
 }
+
+function addData(sus, inf, rem) {
+    chart.data.labels.push('');
+    chart.data.datasets[0].data.push(sus);
+    chart.data.datasets[1].data.push(inf);
+    chart.data.datasets[2].data.push(rem);
+    
+    chart.update(0);
+
+    console.log("added")
+  }

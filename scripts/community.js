@@ -77,4 +77,6 @@ function Community(pop) {
     this.getNumLatestRemoved = function () {
         return latestRemoved;
     };
+
+
 }
