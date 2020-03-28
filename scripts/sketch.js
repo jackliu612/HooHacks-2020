@@ -1,7 +1,13 @@
-function setup() {
+var com;
+var canvas;
 
+function setup() {
+    canvas = createCanvas(windowWidth, windowHeight);
+    com = new Community(10);
+    background(51);
 }
 
 function draw() {
-    ellipse(0,0,10,10)
+    com.update();
+    com.show();
 }
