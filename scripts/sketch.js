@@ -8,8 +8,8 @@ var totKnownDisease = 0;
 var POP_SIZE = 200;
 var TRAVELING;
 var TRAVEL_RATE = 0.05;
-var TRAVEL_THRESHOLD = 1 / 4;
-var SOCIAL_DISTANCING_THRESHOLD = 1 / 4;
+var TRAVEL_THRESHOLD = 1;//1 / 4;
+var SOCIAL_DISTANCING_THRESHOLD = 1;//1 / 4;
 
 var canvas;
 
@@ -100,13 +100,13 @@ function draw() {
         if (inf === 0) {
             pause = true;
         }
-        if (kno >= POP_SIZE*6*SOCIAL_DISTANCING_THRESHOLD) {
+        if (kno >= POP_SIZE * 6 * SOCIAL_DISTANCING_THRESHOLD) {
             console.log('Social Distance Triggered');
             SOCIAL_DISTANCING = true;
         } else {
             SOCIAL_DISTANCING = false;
         }
-        if (kno >= POP_SIZE*6*TRAVEL_THRESHOLD) {
+        if (kno >= POP_SIZE * 6 * TRAVEL_THRESHOLD) {
             console.log('Traveling restricted');
             TRAVELING = false;
         } else {

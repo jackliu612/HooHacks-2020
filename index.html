@@ -47,52 +47,52 @@
                         <tr>
                             <th class="tg-0lax">Disease</th>
                             <th class="tg-0lax">Travel</th>
-                            <th class="tg-0lax">Population</th>
                             <th class="tg-0lax">Social Distancing</th>
+                            <th class="tg-0lax">Population</th>
                         </tr>
                         <tr>
                             <td class="tg-0lax">
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider"
                                        id="transmissionRadius">
-                                <p>Value: <span id="transmissionRadiusLabel"></span></p></td>
+                                <p>Transmission radius: <span id="transmissionRadiusLabel"></span></p></td>
                             <td class="tg-hmp3">
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider"
                                        id="travelRate">
-                                <p>Value: <span id="travelRateLabel"></span></p>
+                                <p>Travel factor: <span id="travelRateLabel"></span></p>
                             </td>
                             <td class="tg-0lax">
-                                <input type="range" min="0" max="400" value="200" step="10" class="slider"
-                                       id="population">
-                                <p>Value: <span id="populationLabel"></span></p>
-                            </td>
-                            <td class="tg-hmp3">
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider"
                                        id="socialDistancingParticipation">
-                                <p>Value: <span id="socialDistancingParticipationLabel"></span></p>
+                                <p>Participation: <span id="socialDistancingParticipationLabel"></span></p>
+                            </td>
+                            <td class="tg-hmp3">
+                                <input type="range" min="0" max="400" value="200" step="10" class="slider"
+                                       id="population">
+                                <p>Size: <span id="populationLabel"></span></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="tg-0lax">
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider"
                                        id="lethality">
-                                <p>Value: <span id="lethalityLabel"></span></p>
+                                <p>Lethality factor: <span id="lethalityLabel"></span></p>
                             </td>
                             <td class="tg-hmp3">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
+                                <input type="range" min="0" max="100" value="100" step="10" class="slider"
                                        id="travelThreshold">
-                                <p>Value: <span id="travelThresholdLabel"></span></p>
+                                <p>Threshold: <span id="travelThresholdLabel"></span></p>
                             </td>
-                            <td class="tg-0lax hide"></td>
-                            <td class="tg-hmp3">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
+                            <td class="tg-0lax">
+                                <input type="range" min="0" max="100" value="100" step="10" class="slider"
                                        id="socialDistancingThreshold">
-                                <p>Value: <span id="socialDistancingThresholdLabel"></span></p>
+                                <p>Threshold: <span id="socialDistancingThresholdLabel"></span></p>
                             </td>
+                            <td class="tg-hmp3 hide"></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax">
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider" id="recovery">
-                                <p>Value: <span id="recoveryLabel"></span></p>
+                                <p>Recovery factor: <span id="recoveryLabel"></span></p>
                             </td>
                             <td class="tg-hmp3 hide"></td>
                             <td class="tg-0lax hide"></td>
@@ -101,7 +101,7 @@
                         <tr>
                             <td class="tg-0lax">
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider" id="carrier">
-                                <p>Value: <span id="carrierLabel"></span></p>
+                                <p>Carrier chance: <span id="carrierLabel"></span></p>
                             </td>
                             <td class="tg-hmp3 hide"></td>
                             <td class="tg-0lax hide"></td>

@@ -79,7 +79,7 @@ travelRateSlider.oninput = function () {
  */
 var travelThresholdSlider = document.getElementById("travelThreshold");
 var travelThresholdOutput = document.getElementById("travelThresholdLabel");
-travelThresholdOutput.innerHTML = "" + 1 / 4;
+travelThresholdOutput.innerHTML = "" + 1;//1 / 4;
 
 travelThresholdSlider.oninput = function () {
     var val = sliderFunc(4, this.value);
@@ -92,7 +92,7 @@ travelThresholdSlider.oninput = function () {
  */
 var socialDistancingParticipationSlider = document.getElementById("socialDistancingParticipation");
 var socialDistancingParticipationOutput = document.getElementById("socialDistancingParticipationLabel");
-socialDistancingParticipationOutput.innerHTML = "" +0.5;
+socialDistancingParticipationOutput.innerHTML = "" + 0.5;
 
 socialDistancingParticipationSlider.oninput = function () {
     var val = sliderFunc(2, this.value);
@@ -105,12 +105,12 @@ socialDistancingParticipationSlider.oninput = function () {
  */
 var socialDistancingThresholdSlider = document.getElementById("socialDistancingThreshold");
 var socialDistancingThresholdOutput = document.getElementById("socialDistancingThresholdLabel");
-socialDistancingThresholdOutput.innerHTML = "" +1/4;
+socialDistancingThresholdOutput.innerHTML = "" + 1;//1/4;
 
 socialDistancingThresholdSlider.oninput = function () {
     var val = sliderFunc(4, this.value);
-    socialDistancingThresholdOutput.innerHTML = truncate(1/4 * val);
-    SOCIAL_DISTANCING_THRESHOLD = 1/4 * val;
+    socialDistancingThresholdOutput.innerHTML = truncate(1 / 4 * val);
+    SOCIAL_DISTANCING_THRESHOLD = 1 / 4 * val;
 };
 
 function sliderFunc(b, x) {
