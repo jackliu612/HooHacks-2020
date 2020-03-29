@@ -112,6 +112,28 @@ function draw() {
         } else {
             TRAVELING = true
         }
+
+        let tbadge = document.getElementById("t_status");
+
+        if(TRAVELING==true){
+            tbadge.className = "badge badge-success";
+            tbadge.innerText = "ON"
+        }
+        else{
+            tbadge.className = "badge badge-danger";
+            tbadge.innerText = "OFF"
+        }
+
+        let sbadge = document.getElementById("sd_status");
+
+        if(SOCIAL_DISTANCING==true){
+            sbadge.className = "badge badge-success";
+            sbadge.innerText = "ON"
+        }
+        else{
+            sbadge.className = "badge badge-danger";
+            sbadge.innerText = "OFF"
+        }
         count++;
     }
 }

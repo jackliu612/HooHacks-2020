@@ -48,16 +48,22 @@
                         <h1 class="h4 mb-0 text-gray-800 mt-3">Epidemic Simulator</h1>
                       </div>                </div>
                 <div class="row" style="height:60vh">
-                    <div class="chart-container" style="position: relative; height:20vh; width:40vw">
+                    <div class="chart-container" style="position: relative; height:17vh; width:40vw">
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
                 <div class="row">
                     <table class="tg" align="center">
                         <tr>
-                            <th class="tg-0lax">Disease</th>
-                            <th class="tg-0lax">Travel</th>
-                            <th class="tg-0lax">Social Distancing</th>
+                            <th class="tg-0lax">Disease</th>                                         
+
+                            <th class="tg-0lax">Travel
+                                <span class="badge badge badge-success" id='t_status'>ON</span>
+                            </th>
+                            <th class="tg-0lax">Social Distancing
+                                <span class="badge badge badge-danger" id='sd_status'>OFF</span>
+
+                            </th>
                             <th class="tg-0lax">Population</th>
                         </tr>
                         <tr>
@@ -97,14 +103,15 @@
                                        id="socialDistancingThreshold">
                                 <p>Threshold: <span id="socialDistancingThresholdLabel"></span></p>
                             </td>
-                            <td class="tg-hmp3 hide"></td>
+                            <td class="tg-hmp3 hide">                                </td>
                         </tr>
                         <tr>
                             <td class="tg-0lax">
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider" id="recovery">
                                 <p>Recovery factor: <span id="recoveryLabel"></span></p>
                             </td>
-                            <td class="tg-hmp3 hide"></td>
+                            <td class="tg-hmp3 hide">                                            
+                               </td>
                             <td class="tg-0lax hide"></td>
                             <td class="tg-hmp3 hide"></td>
                         </tr>
@@ -113,11 +120,21 @@
                                 <input type="range" min="0" max="100" value="50" step="10" class="slider" id="carrier">
                                 <p>Carrier chance: <span id="carrierLabel"></span></p>
                             </td>
-                            <td class="tg-hmp3 hide"></td>
+                            <td class="tg-hmp3 hide">                                            </td>
                             <td class="tg-0lax hide"></td>
-                            <td class="tg-hmp3 hide"></td>
+                            <td class="tg-hmp3 hide">
+                                
+            
+
+                                
+                            </td>
                         </tr>
                     </table>
+
+
+
+
+
                 </div>
             </div>
         </div>
