@@ -15,9 +15,7 @@ function Community(pop) {
 
     var buffer = createGraphics(500, 500);
 
-    population.push(new Person(1));
-
-    for (var i = 1; i < pop; i++) {
+    for (var i = 0; i < pop; i++) {
         population.push(new Person(0));
     }
 
