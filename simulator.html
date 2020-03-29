@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Epidemic Simulator</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="scripts/sketch.js"></script>
+    <script src="scripts/person.js"></script>
+    <script src="scripts/community.js"></script>
+
+    <link href="sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <script src="scripts/Chart.min.js"></script>
+
+
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+</head>
+<body>                    <nav class="navbar navbar-dark bg-dark">
+    <!-- Navbar content -->
+  </nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="row" style="height:8vh; margin:auto">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h4 mb-0 text-gray-800 mt-3">Epidemic Simulator</h1>
+                      </div>                </div>
+                <div class="row" style="height:50vh">
+                    <div class="chart-container" style="position: relative; height:17vh; width:40vw">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="tg" align="center">
+                        <tr>
+                            <th class="tg-0lax">Disease</th>                                         
+
+                            <th class="tg-0lax">Travel
+                                <span class="badge badge badge-success" id='t_status'>ON</span>
+                            </th>
+                            <th class="tg-0lax">Social Distancing
+                                <span class="badge badge badge-danger" id='sd_status'>OFF</span>
+
+                            </th>
+                            <th class="tg-0lax">Population</th>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax">
+                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
+                                       id="transmissionRadius">
+                                <p>Transmission radius: <span id="transmissionRadiusLabel"></span></p></td>
+                            <td class="tg-hmp3">
+                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
+                                       id="travelRate">
+                                <p>Travel factor: <span id="travelRateLabel"></span></p>
+                            </td>
+                            <td class="tg-0lax">
+                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
+                                       id="socialDistancingParticipation">
+                                <p>Participation: <span id="socialDistancingParticipationLabel"></span></p>
+                            </td>
+                            <td class="tg-hmp3">
+                                <input type="range" min="0" max="400" value="200" step="10" class="slider"
+                                       id="population">
+                                <p>Size: <span id="populationLabel"></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax">
+                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
+                                       id="lethality">
+                                <p>Lethality factor: <span id="lethalityLabel"></span></p>
+                            </td>
+                            <td class="tg-hmp3">
+                                <input type="range" min="0" max="100" value="100" step="10" class="slider"
+                                       id="travelThreshold">
+                                <p>Threshold: <span id="travelThresholdLabel"></span></p>
+                            </td>
+                            <td class="tg-0lax">
+                                <input type="range" min="0" max="100" value="100" step="10" class="slider"
+                                       id="socialDistancingThreshold">
+                                <p>Threshold: <span id="socialDistancingThresholdLabel"></span></p>
+                            </td>
+                            <td class="tg-hmp3 hide">                                </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax">
+                                <input type="range" min="0" max="100" value="50" step="10" class="slider" id="recovery">
+                                <p>Recovery factor: <span id="recoveryLabel"></span></p>
+                            </td>
+                            <td class="tg-hmp3 hide">                                            
+                               </td>
+                            <td class="tg-0lax hide"></td>
+                            <td class="tg-hmp3 hide"></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax">
+                                <input type="range" min="0" max="100" value="50" step="10" class="slider" id="carrier">
+                                <p>Carrier chance: <span id="carrierLabel"></span></p>
+                            </td>
+                            <td class="tg-hmp3 hide">                                            </td>
+                            <td class="tg-0lax hide"></td>
+                            <td class="tg-hmp3 hide">
+                                
+            
+
+                                
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col right">
+            <div class="right" id="sketch-holder"></div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="scripts/chart.js"></script>
+<script src="scripts/controls.js"></script>
+
+</html>

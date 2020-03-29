@@ -13,7 +13,7 @@ var SOCIAL_DISTANCING_THRESHOLD = 1;//1 / 4;
 
 var canvas;
 
-var comSize = 225;
+var comSize = 200;
 var boarderWidth = 3;
 var hPad;
 var vPad;
@@ -30,8 +30,8 @@ function setup() {
     var WIDTH;
     TRAVELING = true;
     SOCIAL_DISTANCING = false;
-    HEIGHT = windowHeight;
-    WIDTH = windowWidth / 2;
+    HEIGHT = windowHeight-20;
+    WIDTH = 5*windowWidth / 11;
     hPad = (WIDTH - 2 * comSize) / 3;
     vPad = (HEIGHT - 3 * comSize) / 4;
 
@@ -113,7 +113,7 @@ function draw() {
             TRAVELING = true
         }
 
-        let tbadge = document.getElementById("t_status");
+        var tbadge = document.getElementById("t_status");
 
         if(TRAVELING==true){
             tbadge.className = "badge badge-success";
@@ -124,7 +124,7 @@ function draw() {
             tbadge.innerText = "OFF"
         }
 
-        let sbadge = document.getElementById("sd_status");
+        var sbadge = document.getElementById("sd_status");
 
         if(SOCIAL_DISTANCING==true){
             sbadge.className = "badge badge-success";

@@ -1,152 +1,222 @@
 <!DOCTYPE html>
-<!--suppress HtmlFormInputWithoutLabel -->
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+
     <title>Epidemic Simulator</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
-    <script src="scripts/sketch.js"></script>
-    <script src="scripts/person.js"></script>
-    <script src="scripts/community.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="sb-admin-2.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-
-
-    <link rel="stylesheet" type="text/css" href="style.css">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-
-    <script src="scripts/Chart.min.js"></script>
-
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
 
     <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
 </head>
-<body>                    <nav class="navbar navbar-dark bg-dark">
-    <!-- Navbar content -->
-  </nav>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <div class="container">
-                <div class="row" style="height:8vh; margin:auto">
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h4 mb-0 text-gray-800 mt-3">Epidemic Simulator</h1>
-                      </div>                </div>
-                <div class="row" style="height:60vh">
-                    <div class="chart-container" style="position: relative; height:17vh; width:40vw">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
-                <div class="row">
-                    <table class="tg" align="center">
-                        <tr>
-                            <th class="tg-0lax">Disease</th>                                         
+<body id="page-top">
 
-                            <th class="tg-0lax">Travel
-                                <span class="badge badge badge-success" id='t_status'>ON</span>
-                            </th>
-                            <th class="tg-0lax">Social Distancing
-                                <span class="badge badge badge-danger" id='sd_status'>OFF</span>
-
-                            </th>
-                            <th class="tg-0lax">Population</th>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
-                                       id="transmissionRadius">
-                                <p>Transmission radius: <span id="transmissionRadiusLabel"></span></p></td>
-                            <td class="tg-hmp3">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
-                                       id="travelRate">
-                                <p>Travel factor: <span id="travelRateLabel"></span></p>
-                            </td>
-                            <td class="tg-0lax">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
-                                       id="socialDistancingParticipation">
-                                <p>Participation: <span id="socialDistancingParticipationLabel"></span></p>
-                            </td>
-                            <td class="tg-hmp3">
-                                <input type="range" min="0" max="400" value="200" step="10" class="slider"
-                                       id="population">
-                                <p>Size: <span id="populationLabel"></span></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider"
-                                       id="lethality">
-                                <p>Lethality factor: <span id="lethalityLabel"></span></p>
-                            </td>
-                            <td class="tg-hmp3">
-                                <input type="range" min="0" max="100" value="100" step="10" class="slider"
-                                       id="travelThreshold">
-                                <p>Threshold: <span id="travelThresholdLabel"></span></p>
-                            </td>
-                            <td class="tg-0lax">
-                                <input type="range" min="0" max="100" value="100" step="10" class="slider"
-                                       id="socialDistancingThreshold">
-                                <p>Threshold: <span id="socialDistancingThresholdLabel"></span></p>
-                            </td>
-                            <td class="tg-hmp3 hide">                                </td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider" id="recovery">
-                                <p>Recovery factor: <span id="recoveryLabel"></span></p>
-                            </td>
-                            <td class="tg-hmp3 hide">                                            
-                               </td>
-                            <td class="tg-0lax hide"></td>
-                            <td class="tg-hmp3 hide"></td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax">
-                                <input type="range" min="0" max="100" value="50" step="10" class="slider" id="carrier">
-                                <p>Carrier chance: <span id="carrierLabel"></span></p>
-                            </td>
-                            <td class="tg-hmp3 hide">                                            </td>
-                            <td class="tg-0lax hide"></td>
-                            <td class="tg-hmp3 hide">
-                                
-            
-
-                                
-                            </td>
-                        </tr>
-                    </table>
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div id="sketch-holder"></div>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Epidemic Simulator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#intro">Introduction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#how">How it works</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#you">Where you come in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#params">Parameters</a>
+                </li>
+            </ul>
         </div>
     </div>
-</div>
-</body>
+</nav>
 
-<script src="scripts/chart.js"></script>
-<script src="scripts/controls.js"></script>
+<header class="bg-primary text-white">
+    <div class="container text-center">
+        <h1>Epidemic Simulator</h1>
+        <p class="lead">HooHacks 2020</p>
+        <a href="simulator.html" class="btn btn-success btn-lg large">Go to Simulator!</a>
+    </div>
+</header>
+
+<section id="intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Introduction</h2>
+                <p class="lead">Welcome to our epidemic simulator created by Jack Liu and Victor Pham for HooHacks 2020.
+                    Inspired by the recent global crisis around Covid-19, we wanted to create a tool to help people
+                    understand how epidemics spread and what factors influence the final outcome. This simulation runs
+                    based on the SIR epidemic model where the population is categorized as either susceptible, infected,
+                    or removed. We modified this slightly to account for infected individuals who display no symptoms
+                    (carriers) as well as those who have unfortunately succumbed to the disease.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="how" class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>How it works</h2>
+                <p class="lead">The simulation involves 6 communities with individuals represented as dots and the
+                    quantity of each type of individual graphed over time. In the beginning, there is a single infected
+                    individual and each person is moving randomly. For each successive frame of the simulation, there
+                    are 5 algorithms that are performed to determine the next state:
+                </p>
+                <ul class="lead">
+                    <li>
+                        Transmission: For each susceptible individual within the transmission radius of an infected
+                        individual, there is a chance to pass on the disease.
+                    </li>
+                    <li>
+                        Travel: For each community, there is a chance that one individual in that community travels to
+                        the center of another community.
+                    </li>
+                    <li>
+                        Movement: Initially, each individual wanders around randomly.
+                    </li>
+                    <li>
+                        Recovery: Each infected individual has a chance to recover from the disease that increases based
+                        on the length of time they had been infected. This is governed by the function (t*Recovery
+                        factor/200)^3 where t is time spent infected.
+                    </li>
+                    <li>
+                        Death: Similarly, each infected individual also has a chance to succumb to the disease. The
+                        function for death is (t*Lethality factor/200)^3 where t is time spent infected.
+                    </li>
+                </ul>
+                <p class="lead">This loop continues until a certain critical number of infected individuals is detected
+                    (does not include carriers). Once these thresholds are met, several changes to the previous
+                    algorithms are implemented.
+                </p>
+                <ul class="lead">
+                    <li>
+                        Social Distancing: Social distancing changes the movement of individuals so that they attempt to
+                        avoid others as much as possible. However, the number of individuals who practice social
+                        distancing is influenced by the participation rate.
+                    </li>
+                    <li>
+                        Travel Restrictions: Travel restrictions mean that there is no longer the chance of travel
+                        between communities hopefully slowing down the spread of infection.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="you">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Where you come in</h2>
+                <p class="lead">The power of this simulation is that almost every parameter of the simulation is
+                    variable. This means that you can use this simulation to investigate when is the best time to
+                    implement travel restrictions, or what impacts a few individuals that do not participate in social
+                    distancing has on the overall outcome. Try to experiment and see what factors have the greatest
+                    impact on flattening the curve. The sliders control the values of each parameter and using the space
+                    bar pauses the simulation while the "r" key resets it from the beginning.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="params" class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Parameter Explanations</h2>
+                <ul class="lead">
+                    <li>
+                        Disease
+                    </li>
+                    <ul>
+                        <li>
+                            Transmission radius - the distance the disease can spread
+                        </li>
+                        <li>
+                            Lethality factor - the larger the factor, the more deadly the disease
+                        </li>
+                        <li>
+                            Recovery factor - the larger the factor, the faster individuals recover
+                        </li>
+                        <li>
+                            Carrier chance - the chance an individual is a carrier for the disease and shows no symptoms
+                        </li>
+                    </ul>
+                    <li>
+                        Travel
+                    </li>
+                    <ul>
+                        <li>
+                            Travel factor - How likely is it that an individual will travel to another community
+                        </li>
+                        <li>
+                            Travel threshold - At what percentage of the population is known to have contracted the
+                            disease will travel be restricted
+                        </li>
+                    </ul>
+                    <li>
+                        Population
+                    </li>
+                    <ul>
+                        <li>
+                            Population size - How many individuals start off in each community
+                        </li>
+                    </ul>
+                    <li>
+                        Social Distancing
+                    </li>
+                    <ul>
+                        <li>
+                            Participation rate - What percentage of the population will participate in social distancing
+                        </li>
+                        <li>
+                            Participation threshold - At what percentage of the population is known to have contracted
+                            the disease will social distancing kick in.
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <a class="m-0 text-center text-white nav-link js-scroll-trigger btn btn-secondary btn-lg" href="#page-top">Back to Top</a>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
 
 </html>
