@@ -38,7 +38,7 @@ function setup() {
     canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent('sketch-holder');
 
-    background(255);
+    background(248,249,252);
 
     for (var r = 0; r < 3; r++) {
         for (var c = 0; c < 2; c++) {

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+  <script src="scripts/sketch.js"></script>
+  <script src="scripts/person.js"></script>
+  <script src="scripts/community.js"></script>
+
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+  <script src="scripts/Chart.min.js"></script>
+
+  <title>SB Admin 2 - Dashboard</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h4 mb-0 text-gray-800 mt-3">Epidemic Simulator</h1>
+          </div>
+
+         
+
+          <!-- Content Row -->
+
+          <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="container">
+                        <div class="row" style="height:55vh">
+                            <div class="chart-container" style="position: relative; height:20vh; width:40vw">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="tg" align="center">
+                                <tr>
+                                    <th class="tg-0lax">Disease</th>
+                                    <th class="tg-0lax">Travel</th>
+                                    <th class="tg-0lax">Population</th>
+                                    <th class="tg-0lax">Social Distancing</th>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        <input type="range" min="0" max="100" value="50" step = "10" class="slider" id="transmissionRadius">
+                                        <p>Value: <span id="transmissionRadiusLabel"></span></p></td>
+                                    <td class="tg-hmp3">
+                                        <input type="range" min="0" max="100" value="50" step = "10"  class="slider" id="travelRate">
+                                        <p>Value: <span id="travelRateLabel"></span></p>
+                                    </td>
+                                    <td class="tg-0lax">
+                                        <input type="range" min="0" max="400" value="200" step = "10"  class="slider" id="population">
+                                        <p>Value: <span id="populationLabel"></span></p>
+                                    </td>
+                                    <td class="tg-hmp3">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        <input type="range" min="0" max="100" value="50" step = "10"  class="slider" id="lethality">
+                                        <p>Value: <span id="lethalityLabel"></span></p>
+                                    </td>
+                                    <td class="tg-hmp3">
+                                        <input type="range" min="0" max="100" value="50" step = "10"  class="slider" id="travelThreshold">
+                                        <p>Value: <span id="travelThresholdLabel"></span></p>
+                                    </td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-hmp3"></td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax">
+                                        <input type="range" min="0" max="100" value="50" step = "10"  class="slider" id="recovery">
+                                        <p>Value: <span id="recoveryLabel"></span></p>
+                                    </td>
+                                    <td class="tg-hmp3"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-hmp3"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div id="sketch-holder"></div>
+                </div>
+            </div>
+        </div>
+
+          <!-- Content Row -->
+          <div class="row">
+            <div id="sketch-holder"></div>            
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="scripts/chart.js"></script>
+
+</body>
+
+</html>
