@@ -2,13 +2,13 @@ var BUFFER_WIDTH = 500;
 var BUFFER_HEIGHT = 500;
 var FATALITY_FACTOR = 0.001;
 var RECOVERY_FACTOR = 0.002;
-var timeInfected = 0;
 
 function Person(s) {
     var pos = generatePos();
     var SPEED = 0.44;
     var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
     var size = 0.15;
+    var timeInfected = 0;
 
 
     var status = s;
