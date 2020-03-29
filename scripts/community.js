@@ -1,5 +1,8 @@
 var INFECTION_RATE = 0.3;
 
+var SOCIAL_DISTANCING = false;
+var sDLimit = 0.5;
+
 function Community(pop) {
     var population = [];
     var numSusceptible = [];
@@ -12,6 +15,7 @@ function Community(pop) {
     var latestDead;
 
     var transmissionRadius = 10;
+    var socialRadius = 30;
 
     var buffer = createGraphics(500, 500);
 
@@ -37,18 +41,17 @@ function Community(pop) {
             p.update();
             if (p.getStatus() === 0) {
                 latestSusceptible++;
+                if (SOCIAL_DISTANCING && p.doesSocialDistancing())
+                    socialDistance(p);
             } else if (p.getStatus() === 1) {                                       //Infected, transmit to nearby
                 latestInfected++;
-                population.forEach(function (p2) {                                  //Transmission Code
-                    if(p2.getStatus() === 0) {                                       //Check if not removed
-                        var distance = p.getPosition().dist(p2.getPosition());      //Could optimize if we wanted
-                        if (distance <= transmissionRadius && random() < INFECTION_RATE) {
-                            p2.setStatus(1);
-                        }
-                    }
-                });
+                transmit(p);
+                if (SOCIAL_DISTANCING && p.doesSocialDistancing())
+                    socialDistance(p);
             } else if (p.getStatus() === 2) {
                 latestRemoved++;
+                if (SOCIAL_DISTANCING && p.doesSocialDistancing())
+                    socialDistance(p);
             } else {
                 latestDead++;
             }
@@ -59,6 +62,34 @@ function Community(pop) {
         numRemoved.push(latestRemoved);
         numDead.push(latestDead);
     };
+
+    function transmit(p) {
+        population.forEach(function (p2) {                                  //Transmission Code
+            if (p2.getStatus() === 0) {                                       //Check if not removed
+                var distance = p.getPosition().dist(p2.getPosition());      //Could optimize if we wanted
+                if (distance <= transmissionRadius && random() < INFECTION_RATE) {
+                    p2.setStatus(1);
+                }
+            }
+        });
+    }
+
+    function socialDistance(p) {
+        var vel = createVector();
+
+        population.forEach(function (p2) {
+            if (p2.getStatus() !== 3) {
+                var distance = p.getPosition().dist(p2.getPosition());
+                if (distance <= socialRadius && distance !== 0) {
+                    var push = p5.Vector.sub(p.getPosition(), p2.getPosition());
+                    push.div(distance);
+                    vel.add(push);
+                }
+            }
+        });
+        vel.limit(sDLimit);
+        p.setVelocity(vel);
+    }
 
     this.getNumSusceptible = function () {
         return numSusceptible;
@@ -89,11 +120,15 @@ function Community(pop) {
     };
 
 
-    this.getNumLatestDead = function() {
+    this.getNumLatestDead = function () {
         return latestDead;
     };
 
-    this.getPopulation = function() {
+    this.getPopulation = function () {
         return population;
     };
+
+    this.setSocial = function (b) {
+        SOCIAL_DISTANCING = b;
+    }
 }

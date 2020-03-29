@@ -21,7 +21,6 @@ var count = 0;
 var pause = false;
 
 function setup() {
-
     //frameRate(10);
     HEIGHT = windowHeight;
     WIDTH = windowWidth / 2;
@@ -87,6 +86,10 @@ function draw() {
             addData(sus, inf, rem);
         if (inf === 0) {
             pause = true;
+        }
+        if (inf >= popSize/2 && !SOCIAL_DISTANCING) {
+            console.log('Hi');
+            SOCIAL_DISTANCING = true;
         }
         count ++;
     }

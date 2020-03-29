@@ -3,12 +3,16 @@ var BUFFER_HEIGHT = 500;
 var FATALITY_FACTOR = 0.01;
 var RECOVERY_FACTOR = 0.05;
 
+var SOCIAL_DISTANCING_FACTOR = .5;
+
 function Person(s) {
     var pos = generatePos();
     var SPEED = 0.44;
     var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
     var size = 0.15;
     var timeInfected = 0;
+
+    var socialDistancingParticipation = (random() < SOCIAL_DISTANCING_FACTOR);
 
 
     var status = s;
@@ -96,6 +100,10 @@ function Person(s) {
 
     this.setStatus = function (s) {
         status = s;
+    };
+
+    this.doesSocialDistancing = function () {
+        return socialDistancingParticipation;
     }
 
 }
