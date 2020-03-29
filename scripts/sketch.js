@@ -20,6 +20,8 @@ var count = 0;
 
 var pause = false;
 
+var storedData=[];
+
 function setup() {
 
     //frameRate(10);
@@ -108,11 +110,13 @@ function getTotNumDead() {
     return totNumDead;
 }
 
-function addData(sus, inf, rem) {
+function addData(sus, inf, rem, ded) {
     chart.data.labels.push('');
     chart.data.datasets[1].data.push(sus);
     chart.data.datasets[0].data.push(inf);
     chart.data.datasets[2].data.push(rem);
+    chart.data.datasets[3].data.push(ded);
+
     
     chart.update(0);
 
@@ -130,5 +134,30 @@ function keyPressed() {
 
 function reset(){
     setup();
+    storeData();
+    //reset graph
+    chart.update(0);
+    chart.data.labels=[];
+    chart.data.datasets[0].data=[];
+    chart.data.datasets[1].data=[];
+    chart.data.datasets[2].data=[];
+    chart.data.datasets[3].data=[];
+
+    chart.update(0);
     pause = false;
+}
+
+function storeData(){
+    storedData.push([chart.data.labels, chart.data.datasets[0].data, chart.data.datasets[1].data, chart.data.datasets[2].data, chart.data.datasets[3].data]);
+}
+
+function getStoredData(index){
+    chart.data.labels=storedData[0][0];
+    chart.data.datasets[0].data=storedData[0][1];
+    chart.data.datasets[1].data=storedData[0][2];
+    chart.data.datasets[2].data=storedData[0][3];
+    chart.data.datasets[3].data=storedData[0][4];
+
+    chart.update(0);
+
 }
