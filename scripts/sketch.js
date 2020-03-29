@@ -3,10 +3,14 @@ var totNumSusceptible = [];
 var totNumInfected = [];
 var totNumRemoved = [];
 var totNumDead = [];
-
-var TRAVEL_RATE = 0.05;
+var totKnownDisease = 0;
 
 var POP_SIZE = 200;
+var TRAVELING;
+var TRAVEL_RATE = 0.05;
+var TRAVEL_THRESHOLD = POP_SIZE * 6 / 4;
+var SOCIAL_DISTANCING_THRESHOLD = POP_SIZE * 6 / 4;
+
 var canvas;
 var HEIGHT;
 var WIDTH;
@@ -24,6 +28,8 @@ var storedData = [];
 
 function setup() {
     //frameRate(10);
+    TRAVELING = true;
+    SOCIAL_DISTANCING = false;
     HEIGHT = windowHeight;
     WIDTH = windowWidth / 2;
     hPad = (WIDTH - 2 * comSize) / 3;
@@ -48,15 +54,16 @@ function setup() {
 
 function draw() {
     if (!pause) {
-        var sus = 0, inf = 0, rem = 0, ded = 0;
-
-        for (var r = 0; r < 3; r++) {
-            for (var c = 0; c < 2; c++) {
-                var pop = coms[r][c].getPopulation();
-                if (random() < TRAVEL_RATE) {
-                    var individual = pop.shift();
-                    individual.setPosition(createVector(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2));
-                    coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(individual);
+        var sus = 0, inf = 0, rem = 0, ded = 0, kno = 0;
+        if (TRAVELING) {
+            for (var r = 0; r < 3; r++) {
+                for (var c = 0; c < 2; c++) {
+                    if (random() < TRAVEL_RATE) {
+                        var pop = coms[r][c].getPopulation();
+                        var individual = pop.shift();
+                        individual.setPosition(createVector(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2));
+                        coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(individual);
+                    }
                 }
             }
         }
@@ -70,6 +77,7 @@ function draw() {
                 inf += coms[r][c].getNumLatestInfected();
                 rem += coms[r][c].getNumLatestRemoved();
                 ded += coms[r][c].getNumLatestDead();
+                kno += coms[r][c].getNumKnownDisease();
             }
         }
         /*
@@ -90,9 +98,13 @@ function draw() {
         if (inf === 0) {
             pause = true;
         }
-        if (inf >= POP_SIZE / 2 && !SOCIAL_DISTANCING) {
-            console.log('Hi');
+        if (kno >= SOCIAL_DISTANCING_THRESHOLD && !SOCIAL_DISTANCING) {
+            console.log('Social Distance Triggered');
             SOCIAL_DISTANCING = true;
+        }
+        if (kno >= TRAVEL_THRESHOLD && TRAVELING) {
+            console.log('Traveling restricted');
+            TRAVELING = false;
         }
         count++;
     }

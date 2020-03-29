@@ -2,6 +2,7 @@ var BUFFER_WIDTH = 500;
 var BUFFER_HEIGHT = 500;
 var FATALITY_FACTOR = 0.01;
 var RECOVERY_FACTOR = 0.05;
+var CARRIER_CHANCE = 0.2;
 
 var SOCIAL_DISTANCING_FACTOR = .5;
 
@@ -12,6 +13,7 @@ function Person(s) {
     var acc = vel.copy();
     var size = 0.15;
     var timeInfected = 0;
+    var carrier = random() < CARRIER_CHANCE;
 
     var socialDistancingParticipation = (random() < SOCIAL_DISTANCING_FACTOR);
 
@@ -74,7 +76,11 @@ function Person(s) {
     this.show = function show(b) {
         b.push();
         b.noStroke();
-        b.fill(color[status]);
+        if(status === 1 && carrier){
+            b.fill(217, 255, 3);
+        } else {
+            b.fill(color[status]);
+        }
         b.translate(pos.x, pos.y);
         b.ellipse(0, 0, 50 * size, 50 * size);
         b.pop();
@@ -117,6 +123,10 @@ function Person(s) {
 
     this.doesSocialDistancing = function () {
         return socialDistancingParticipation;
-    }
+    };
+
+    this.isCarrier = function() {
+        return carrier;
+    };
 
 }

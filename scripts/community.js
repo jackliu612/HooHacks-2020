@@ -15,6 +15,7 @@ function Community(pop) {
     var latestInfected;
     var latestRemoved;
     var latestDead;
+    var knownDisease;
 
 
     var socialRadius = 30;
@@ -38,6 +39,7 @@ function Community(pop) {
         latestInfected = 0;
         latestRemoved = 0;
         latestDead = 0;
+        knownDisease = 0;
 
         population.forEach(function (p) {
             p.update();
@@ -47,6 +49,9 @@ function Community(pop) {
                     socialDistance(p);
             } else if (p.getStatus() === 1) {                                       //Infected, transmit to nearby
                 latestInfected++;
+                if (!p.isCarrier()) {
+                    knownDisease++;
+                }
                 transmit(p);
                 if (SOCIAL_DISTANCING && p.doesSocialDistancing())
                     socialDistance(p);
@@ -124,6 +129,10 @@ function Community(pop) {
 
     this.getNumLatestDead = function () {
         return latestDead;
+    };
+
+    this.getNumKnownDisease = function () {
+        return knownDisease;
     };
 
     this.getPopulation = function () {
