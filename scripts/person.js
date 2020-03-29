@@ -1,7 +1,7 @@
 var BUFFER_WIDTH = 500;
 var BUFFER_HEIGHT = 500;
-var FATALITY_FACTOR = 0.001;
-var RECOVERY_FACTOR = 0.002;
+var FATALITY_FACTOR = 0.01;
+var RECOVERY_FACTOR = 0.05;
 
 function Person(s) {
     var pos = generatePos();
@@ -30,14 +30,14 @@ function Person(s) {
     };
 
     function recover() {
-        rRate = Math.pow((RECOVERY_FACTOR * timeInfected / 10000), 3);
+        rRate = Math.pow((RECOVERY_FACTOR * timeInfected / 200), 3);
         if (random() < rRate) {
             status = 2;
         }
     }
 
     function die() {
-        fRate = Math.pow((FATALITY_FACTOR * timeInfected / 10000), 3);
+        fRate = Math.pow((FATALITY_FACTOR * timeInfected / 200), 3);
         if (random() < fRate) {
             status = 3;
         }
