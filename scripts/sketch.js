@@ -62,7 +62,6 @@ function draw() {
                         var pop = coms[r][c].getPopulation();
                         var individual = pop.shift();
                         if (individual !== undefined) {
-                            console.log(individual);
                             individual.setPosition(createVector(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2));
                             coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(individual);
                         }
