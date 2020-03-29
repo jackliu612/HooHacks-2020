@@ -37,6 +37,19 @@ recoverySlider.oninput = function () {
 };
 
 /*
+    CARRIER
+ */
+var carrierSlider = document.getElementById("carrier");
+var carrierOutput = document.getElementById("carrierLabel");
+carrierOutput.innerHTML = "" + 0.2;
+
+carrierSlider.oninput = function () {
+    var val = sliderFunc(4, this.value);
+    carrierOutput.innerHTML = truncate(0.2 * val);
+    CARRIER_CHANCE = 0.2 * val;
+};
+
+/*
     Population
  */
 var populationSlider = document.getElementById("population");
@@ -66,12 +79,38 @@ travelRateSlider.oninput = function () {
  */
 var travelThresholdSlider = document.getElementById("travelThreshold");
 var travelThresholdOutput = document.getElementById("travelThresholdLabel");
-travelThresholdOutput.innerHTML = "" + 1 / 4;
+travelThresholdOutput.innerHTML = "" + 1;//1 / 4;
 
 travelThresholdSlider.oninput = function () {
-    var val = sliderFunc(8, this.value);
+    var val = sliderFunc(4, this.value);
     travelThresholdOutput.innerHTML = truncate(1 / 4 * val);
     TRAVEL_THRESHOLD = 1 / 4 * val;
+};
+
+/*
+    SOCIAL DISTANCING PARTICIPATION
+ */
+var socialDistancingParticipationSlider = document.getElementById("socialDistancingParticipation");
+var socialDistancingParticipationOutput = document.getElementById("socialDistancingParticipationLabel");
+socialDistancingParticipationOutput.innerHTML = "" + 0.5;
+
+socialDistancingParticipationSlider.oninput = function () {
+    var val = sliderFunc(2, this.value);
+    socialDistancingParticipationOutput.innerHTML = truncate(0.5 * val);
+    SOCIAL_DISTANCING_FACTOR = 0.5 * val;
+};
+
+/*
+    SOCIAL DISTANCING THRESHOLD
+ */
+var socialDistancingThresholdSlider = document.getElementById("socialDistancingThreshold");
+var socialDistancingThresholdOutput = document.getElementById("socialDistancingThresholdLabel");
+socialDistancingThresholdOutput.innerHTML = "" + 1;//1/4;
+
+socialDistancingThresholdSlider.oninput = function () {
+    var val = sliderFunc(4, this.value);
+    socialDistancingThresholdOutput.innerHTML = truncate(1 / 4 * val);
+    SOCIAL_DISTANCING_THRESHOLD = 1 / 4 * val;
 };
 
 function sliderFunc(b, x) {
