@@ -8,12 +8,10 @@ var totKnownDisease = 0;
 var POP_SIZE = 200;
 var TRAVELING;
 var TRAVEL_RATE = 0.05;
-var TRAVEL_THRESHOLD = POP_SIZE * 6 / 4;
-var SOCIAL_DISTANCING_THRESHOLD = POP_SIZE * 6 / 4;
+var TRAVEL_THRESHOLD = 1 / 4;
+var SOCIAL_DISTANCING_THRESHOLD = 1 / 4;
 
 var canvas;
-var HEIGHT;
-var WIDTH;
 
 var comSize = 225;
 var boarderWidth = 3;
@@ -28,6 +26,8 @@ var storedData = [];
 
 function setup() {
     //frameRate(10);
+    var HEIGHT;
+    var WIDTH;
     TRAVELING = true;
     SOCIAL_DISTANCING = false;
     HEIGHT = windowHeight;
@@ -61,8 +61,11 @@ function draw() {
                     if (random() < TRAVEL_RATE) {
                         var pop = coms[r][c].getPopulation();
                         var individual = pop.shift();
-                        individual.setPosition(createVector(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2));
-                        coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(individual);
+                        if (individual !== undefined) {
+                            console.log(individual);
+                            individual.setPosition(createVector(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2));
+                            coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(individual);
+                        }
                     }
                 }
             }
@@ -98,13 +101,17 @@ function draw() {
         if (inf === 0) {
             pause = true;
         }
-        if (kno >= SOCIAL_DISTANCING_THRESHOLD && !SOCIAL_DISTANCING) {
+        if (kno >= POP_SIZE*6*SOCIAL_DISTANCING_THRESHOLD) {
             console.log('Social Distance Triggered');
             SOCIAL_DISTANCING = true;
+        } else {
+            SOCIAL_DISTANCING = false;
         }
-        if (kno >= TRAVEL_THRESHOLD && TRAVELING) {
+        if (kno >= POP_SIZE*6*TRAVEL_THRESHOLD) {
             console.log('Traveling restricted');
             TRAVELING = false;
+        } else {
+            TRAVELING = true
         }
         count++;
     }
