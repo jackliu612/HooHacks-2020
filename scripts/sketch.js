@@ -103,19 +103,16 @@ function draw() {
         if (kno >= POP_SIZE * 6 * SOCIAL_DISTANCING_THRESHOLD) {
             console.log('Social Distance Triggered');
             SOCIAL_DISTANCING = true;
-        } else {
-            SOCIAL_DISTANCING = false;
         }
+
         if (kno >= POP_SIZE * 6 * TRAVEL_THRESHOLD) {
             console.log('Traveling restricted');
             TRAVELING = false;
-        } else {
-            TRAVELING = true
         }
 
         var tbadge = document.getElementById("t_status");
 
-        if(TRAVELING==true){
+        if(TRAVELING===true){
             tbadge.className = "badge badge-success";
             tbadge.innerText = "ON"
         }
@@ -126,7 +123,7 @@ function draw() {
 
         var sbadge = document.getElementById("sd_status");
 
-        if(SOCIAL_DISTANCING==true){
+        if(SOCIAL_DISTANCING===true){
             sbadge.className = "badge badge-success";
             sbadge.innerText = "ON"
         }
