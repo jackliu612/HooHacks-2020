@@ -19,7 +19,7 @@ function Community(pop) {
 
     var socialRadius = 30;
 
-    var buffer = createGraphics(500, 500);
+    var buffer = createGraphics(BUFFER_WIDTH, BUFFER_HEIGHT);
 
     for (var i = 0; i < pop; i++) {
         population.push(new Person(0));
@@ -89,8 +89,8 @@ function Community(pop) {
                 }
             }
         });
-        vel.limit(SOCIAL_DISTANCING_FORCE);
-        p.setVelocity(vel);
+        vel.mag(SOCIAL_DISTANCING_FORCE);
+        p.setAcceleration(vel);
     }
 
     this.getNumSusceptible = function () {

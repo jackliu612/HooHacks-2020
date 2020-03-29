@@ -9,6 +9,7 @@ function Person(s) {
     var pos = generatePos();
     var SPEED = 0.44;
     var vel = createVector(SPEED, 0).rotate(random() * Math.PI * 2);
+    var acc = vel.copy();
     var size = 0.15;
     var timeInfected = 0;
 
@@ -48,6 +49,8 @@ function Person(s) {
     }
 
     function move() {
+        vel.add(acc);
+        vel.limit(SPEED);
         pos.add(vel);
         bounceWalls();
     }
@@ -55,10 +58,12 @@ function Person(s) {
     function bounceWalls() {
         if (pos.x < 0 || pos.x > BUFFER_WIDTH) {
             vel = createVector(-vel.x, vel.y);
+            acc = createVector(-acc.x, acc.y);
         }
 
         if (pos.y < 0 || pos.y > BUFFER_HEIGHT) {
             vel = createVector(vel.x, -1 * vel.y);
+            acc = createVector(acc.x, -1 * acc.y);
         }
     }
 
@@ -83,6 +88,10 @@ function Person(s) {
         return vel.copy();
     };
 
+    this.getAcceleration = function () {
+        return acc.copy();
+    };
+
     this.getSize = function () {
         return size;
     };
@@ -96,6 +105,10 @@ function Person(s) {
     };
     this.setVelocity = function (v) {
         vel = v.copy();
+    };
+
+    this.setAcceleration = function(a) {
+        acc = a.copy();
     };
 
     this.setStatus = function (s) {

@@ -4,7 +4,7 @@ var totNumInfected = [];
 var totNumRemoved = [];
 var totNumDead = [];
 
-var TRAVEL_RATE = 0.0001;
+var TRAVEL_RATE = 0.05;
 
 var POP_SIZE = 200;
 var canvas;
@@ -20,7 +20,7 @@ var count = 0;
 
 var pause = false;
 
-var storedData=[];
+var storedData = [];
 
 function setup() {
     //frameRate(10);
@@ -53,9 +53,10 @@ function draw() {
         for (var r = 0; r < 3; r++) {
             for (var c = 0; c < 2; c++) {
                 var pop = coms[r][c].getPopulation();
-                var travels = pop.length * TRAVEL_RATE;
-                for (var i = 0; i < travels; i++) {
-                    coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(pop.shift());
+                if (random() < TRAVEL_RATE) {
+                    var individual = pop.shift();
+                    individual.setPosition(createVector(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2));
+                    coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(individual);
                 }
             }
         }
@@ -89,11 +90,11 @@ function draw() {
         if (inf === 0) {
             pause = true;
         }
-        if (inf >= POP_SIZE/2 && !SOCIAL_DISTANCING) {
+        if (inf >= POP_SIZE / 2 && !SOCIAL_DISTANCING) {
             console.log('Hi');
             SOCIAL_DISTANCING = true;
         }
-        count ++;
+        count++;
     }
 }
 
@@ -120,46 +121,46 @@ function addData(sus, inf, rem, ded) {
     chart.data.datasets[2].data.push(rem);
     chart.data.datasets[3].data.push(ded);
 
-    
+
     chart.update(0);
 
     console.log("added")
 }
 
 function keyPressed() {
-    if(keyCode === 32) {    //Spacebar
+    if (keyCode === 32) {    //Spacebar
         pause = !pause;
     }
-    if(keyCode === 82) {    //R key
+    if (keyCode === 82) {    //R key
         reset();
     }
 }
 
-function reset(){
+function reset() {
     setup();
     storeData();
     //reset graph
     chart.update(0);
-    chart.data.labels=[];
-    chart.data.datasets[0].data=[];
-    chart.data.datasets[1].data=[];
-    chart.data.datasets[2].data=[];
-    chart.data.datasets[3].data=[];
+    chart.data.labels = [];
+    chart.data.datasets[0].data = [];
+    chart.data.datasets[1].data = [];
+    chart.data.datasets[2].data = [];
+    chart.data.datasets[3].data = [];
 
     chart.update(0);
     pause = false;
 }
 
-function storeData(){
+function storeData() {
     storedData.push([chart.data.labels, chart.data.datasets[0].data, chart.data.datasets[1].data, chart.data.datasets[2].data, chart.data.datasets[3].data]);
 }
 
-function getStoredData(index){
-    chart.data.labels=storedData[0][0];
-    chart.data.datasets[0].data=storedData[0][1];
-    chart.data.datasets[1].data=storedData[0][2];
-    chart.data.datasets[2].data=storedData[0][3];
-    chart.data.datasets[3].data=storedData[0][4];
+function getStoredData(index) {
+    chart.data.labels = storedData[0][0];
+    chart.data.datasets[0].data = storedData[0][1];
+    chart.data.datasets[1].data = storedData[0][2];
+    chart.data.datasets[2].data = storedData[0][3];
+    chart.data.datasets[3].data = storedData[0][4];
 
     chart.update(0);
 
