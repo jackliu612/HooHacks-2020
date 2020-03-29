@@ -4,9 +4,9 @@ var totNumInfected = [];
 var totNumRemoved = [];
 var totNumDead = [];
 
-var travelRate = 0.0001;
+var TRAVEL_RATE = 0.0001;
 
-var popSize = 200;
+var POP_SIZE = 200;
 var canvas;
 var HEIGHT;
 var WIDTH;
@@ -34,7 +34,7 @@ function setup() {
 
     for (var r = 0; r < 3; r++) {
         for (var c = 0; c < 2; c++) {
-            coms[r][c] = (new Community(popSize));
+            coms[r][c] = (new Community(POP_SIZE));
             fill(0);
             rect(hPad + c * (comSize + hPad) - boarderWidth, vPad + r * (comSize + vPad) - boarderWidth, comSize + 2 * boarderWidth, comSize + 2 * boarderWidth);
         }
@@ -51,7 +51,7 @@ function draw() {
         for (var r = 0; r < 3; r++) {
             for (var c = 0; c < 2; c++) {
                 var pop = coms[r][c].getPopulation();
-                var travels = pop.length * travelRate;
+                var travels = pop.length * TRAVEL_RATE;
                 for (var i = 0; i < travels; i++) {
                     coms[Math.floor(random() * 3)][Math.floor(random() * 2)].getPopulation().push(pop.shift());
                 }
@@ -87,7 +87,7 @@ function draw() {
         if (inf === 0) {
             pause = true;
         }
-        if (inf >= popSize/2 && !SOCIAL_DISTANCING) {
+        if (inf >= POP_SIZE/2 && !SOCIAL_DISTANCING) {
             console.log('Hi');
             SOCIAL_DISTANCING = true;
         }
