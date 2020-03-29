@@ -19,7 +19,7 @@ function Person(s) {
 
 
     var status = s;
-    var color = ['white', 'red', 'blue', 'black'];
+    var color = ['rgb(235, 240, 244)', 'rgb(255, 104, 104)', 'rgb(7, 146, 165)', 'rgb(18, 3, 43)'];
 
     this.update = function () {
         switch (status) {
@@ -77,7 +77,7 @@ function Person(s) {
         b.push();
         b.noStroke();
         if(status === 1 && carrier){
-            b.fill(217, 255, 3);
+            b.fill(255, 158, 158);
         } else {
             b.fill(color[status]);
         }

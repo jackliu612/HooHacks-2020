@@ -95,8 +95,8 @@ function draw() {
         // strokeWeight(4);
         // image(buf, 20, 20, comSize, comSize);
         // pop();
-        if (count % 5 === 0)
-            addData(sus, inf, rem);
+        if (count >=0)
+            addData(sus, inf, rem, ded);
         if (inf === 0) {
             pause = true;
         }
