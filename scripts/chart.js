@@ -8,8 +8,8 @@ var chart = new Chart(ctx, {
         labels: [],
         datasets: [{
             label: 'Infected',
-            backgroundColor: 'rgb(184, 4, 4)',
-            borderColor: 'rgb(184, 4, 4)',
+            backgroundColor: 'rgb(255, 104, 104)',
+            borderColor: 'rgb(255, 104, 104)',
             data: []
         }, {            
             label: 'Susceptible',
@@ -18,13 +18,13 @@ var chart = new Chart(ctx, {
             data: []
         }, {
             label: 'Recovered',
-            backgroundColor: 'rgb(188, 227, 166)',
-            borderColor: 'rgb(188, 227, 166)',
+            backgroundColor: 'rgb(7, 146, 165)',
+            borderColor: 'rgb(7, 146, 165)',
             data: []
         }, {            
             label: 'Dead',
-            backgroundColor: 'rgb(10, 10, 10)',
-            borderColor: 'rgb(10, 10, 10)',
+            backgroundColor: 'rgb(18, 3, 43)',
+            borderColor: 'rgb(18, 3, 43)',
             data: []
         }]
         
