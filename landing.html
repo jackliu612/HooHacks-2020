@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Epidemic Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Epidemic Simulator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#intro">Introduction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#how">How it works</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#you">Where you come in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#params">Parameters</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-primary text-white">
+    <div class="container text-center">
+        <h1>Welcome to Scrolling Nav</h1>
+        <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+    </div>
+</header>
+
+<section id="intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Introduction</h2>
+                <p class="lead">Welcome to our epidemic simulator created by Jack Liu and Victor Pham for HooHacks 2020.
+                    Inspired by the recent global crisis around Covid-19, we wanted to create a tool to help people
+                    understand how epidemics spread and what factors influence the final outcome. This simulation runs
+                    based on the SIR epidemic model where the population is categorized as either susceptible, infected,
+                    or removed. We modified this slightly to account for infected individuals who display no symptoms
+                    (carriers) as well as those who have unfortunately succumbed to the disease.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="how" class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>How it works</h2>
+                <p class="lead">The simulation involves 6 communities with individuals represented as dots and the
+                    quantity of each type of individual graphed over time. In the beginning, there is a single infected
+                    individual and each person is moving randomly. For each successive frame of the simulation, there
+                    are 5 algorithms that are performed to determine the next state:
+                </p>
+                <ul class="lead">
+                    <li>
+                        Transmission: For each susceptible individual within the transmission radius of an infected
+                        individual, there is a chance to pass on the disease.
+                    </li>
+                    <li>
+                        Travel: For each community, there is a chance that one individual in that community travels to
+                        the center of another community.
+                    </li>
+                    <li>
+                        Movement: Initially, each individual wanders around randomly.
+                    </li>
+                    <li>
+                        Recovery: Each infected individual has a chance to recover from the disease that increases based
+                        on the length of time they had been infected. This is governed by the function (t*Recovery
+                        factor/200)^3 where t is time spent infected.
+                    </li>
+                    <li>
+                        Death: Similarly, each infected individual also has a chance to succumb to the disease. The
+                        function for death is (t*Lethality factor/200)^3 where t is time spent infected.
+                    </li>
+                </ul>
+                <p class="lead">This loop continues until a certain critical number of infected individuals is detected
+                    (does not include carriers). Once these thresholds are met, several changes to the previous
+                    algorithms are implemented.
+                </p>
+                <ul class="lead">
+                    <li>
+                        Social Distancing: Social distancing changes the movement of individuals so that they attempt to
+                        avoid others as much as possible. However, the number of individuals who practice social
+                        distancing is influenced by the participation rate.
+                    </li>
+                    <li>
+                        Travel Restrictions: Travel restrictions mean that there is no longer the chance of travel
+                        between communities hopefully slowing down the spread of infection.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="you">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Where you come in</h2>
+                <p class="lead">The power of this simulation is that almost every parameter of the simulation is
+                    variable. This means that you can use this simulation to investigate when is the best time to
+                    implement travel restrictions, or what impacts a few individuals that do not participate in social
+                    distancing has on the overall outcome. Try to experiment and see what factors have the greatest
+                    impact on flattening the curve. The sliders control the values of each parameter and using the space
+                    bar pauses the simulation while the "r" key resets it from the beginning.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="params" class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Parameter Explanations</h2>
+                <ul class="lead">
+                    <li>
+                        Disease
+                    </li>
+                    <ul>
+                        <li>
+                            Transmission radius - the distance the disease can spread
+                        </li>
+                        <li>
+                            Lethality factor - the larger the factor, the more deadly the disease
+                        </li>
+                        <li>
+                            Recovery factor - the larger the factor, the faster individuals recover
+                        </li>
+                        <li>
+                            Carrier chance - the chance an individual is a carrier for the disease and shows no symptoms
+                        </li>
+                    </ul>
+                    <li>
+                        Travel
+                    </li>
+                    <ul>
+                        <li>
+                            Travel factor - How likely is it that an individual will travel to another community
+                        </li>
+                        <li>
+                            Travel threshold - At what percentage of the population is known to have contracted the
+                            disease will travel be restricted
+                        </li>
+                    </ul>
+                    <li>
+                        Population
+                    </li>
+                    <ul>
+                        <li>
+                            Population size - How many individuals start off in each community
+                        </li>
+                    </ul>
+                    <li>
+                        Social Distancing
+                    </li>
+                    <ul>
+                        <li>
+                            Participation rate - What percentage of the population will participate in social distancing
+                        </li>
+                        <li>
+                            Participation threshold - At what percentage of the population is known to have contracted
+                            the disease will social distancing kick in.
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
